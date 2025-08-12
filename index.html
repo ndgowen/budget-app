@@ -1,0 +1,799 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Budget Tracker&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- PWA Meta Tags --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-status-bar-style" content="light-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-title" content="Budget Tracker"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Icons --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9IiM4Rjg4NjEiLz4KPHN2ZyB4PSI0NSIgeT0iNDUiIHdpZHRoPSI5MCIgaGVpZ2h0PSI5MCIgdmlld0JveD0iMCAwIDkwIDkwIj4KPHN2ZyB3aWR0aD0iOTAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA5MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHRleHQgeD0iNDUiIHk9IjMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkF2ZW5pciIgZm9udC1zaXplPSIzNiIgZm9udC13ZWlnaHQ9IjMwMCI+JDwvdGV4dD4KPHN2ZyB4PSIxNSIgeT0iNDAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzNSI+CjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI4IiByeD0iNCIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSI0NSIgaGVpZ2h0PSI4IiByeD0iNCIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjQiIHdpZHRoPSI1MCIgaGVpZ2h0PSI4IiByeD0iNCIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo8L3N2Zz4KPC9zdmc+"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="theme-color" content="#8F8861"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* General styles for the body and overall layout */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Avenir', 'Avenir Next', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #FFFFFF 0%, #E8DBCD 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Main container for the app */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.95);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 32px rgba(76, 78, 73, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(213, 219, 206, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: calc(100% - 20px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Header section with title and budget */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.app-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Avenir', 'Avenir Next', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.daily-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Avenir', 'Avenir Next', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 200;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.3px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Budget status indicator */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.budget-status {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.under-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #D5DBCE 0%, #E8DBCD 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.over-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #4C4E49 0%, #191919 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #FFFFFF;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.on-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #8F8861 0%, #A89B7A 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #FFFFFF;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Expense form styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.expense-form {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-group {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-input {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid rgba(213, 219, 206, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.9);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-input:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.95);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-1px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 16px rgba(143, 136, 97, 0.15);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.add-expense-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #4C4E49 0%, #191919 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.add-expense-btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 6px 20px rgba(76, 78, 73, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.add-expense-btn:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Styling for the list of expenses */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.expenses-list {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.section-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Avenir', 'Avenir Next', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.4px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.expense-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.8);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-left: 4px solid #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.expense-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-right: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.expense-description {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.expense-amount {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.delete-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #191919;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.delete-btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Monthly summary section */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.monthly-summary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, rgba(213, 219, 206, 0.3) 0%, rgba(232, 219, 205, 0.3) 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(143, 136, 97, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.summary-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.summary-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.summary-value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Calendar view styles */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-grid {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(7, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>aspect-ratio: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-height: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.current-month {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.7);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.other-month {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #D5DBCE;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.today {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.over-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #191919;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.under-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #D5DBCE;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.on-budget {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.clickable {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.clickable:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(76, 78, 73, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.calendar-day.selected {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #4C4E49;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Calendar navigation buttons */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-buttons {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(213, 219, 206, 0.4);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(143, 136, 97, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.month-year {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Avenir', 'Avenir Next', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #8F8861;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.3px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Responsive design for smaller screens */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 480px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>max-width: none;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.daily-budget {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.calendar-grid {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>gap: 0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>margin-top: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.calendar-day {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>min-height: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>max-height: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 9px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>border-radius: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.calendar-day.header {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 9px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>min-height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.delete-btn {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>width: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="app-title"&gt;Daily Budget&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="daily-budget"&gt;$&lt;span id="remaining-budget"&gt;50.00&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="budget-status" id="budget-status"&gt;Ready to track expenses&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;form class="expense-form" id="expense-form"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="form-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label class="form-label" for="expense-description"&gt;What did you spend on?&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="text" id="expense-description" class="form-input" placeholder="Coffee, lunch, groceries..." required&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="form-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label class="form-label" for="expense-amount"&gt;Amount&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="number" id="expense-amount" class="form-input" placeholder="0.00" step="0.01" min="0" required&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button type="submit" class="add-expense-btn"&gt;Add Expense&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expenses-list"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="section-title"&gt;&lt;span id="expenses-date"&gt;Today's&lt;/span&gt; Expenses&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="expenses-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p style="text-align: center; color: #bbb; font-style: italic;"&gt;No expenses yet today&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="monthly-summary"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="section-title"&gt;This Month&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="summary-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="summary-label"&gt;Monthly Budget:&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="summary-value"&gt;$&lt;span id="monthly-budget"&gt;1550.00&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="summary-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="summary-label"&gt;Total Spent:&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="summary-value"&gt;$&lt;span id="monthly-spent"&gt;0.00&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="summary-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="summary-label"&gt;Remaining:&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="summary-value"&gt;$&lt;span id="monthly-remaining"&gt;1550.00&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="calendar-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="section-title"&gt;Calendar View&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="nav-buttons"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="nav-btn" id="prev-month"&gt;‹ Prev&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="month-year" id="current-month-year"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="nav-btn" id="next-month"&gt;Next ›&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="calendar-grid" id="calendar-grid"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- App State ---</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const DAILY_BUDGET = 50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentDate = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let viewingMonth = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let selectedDate = new Date(); // Tracks which date we're viewing/editing</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let expenses = loadExpenses(); // Load saved data on start</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- Data Persistence ---</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Saves the expenses object to browser cookies.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {object} expenses - The expenses object to save.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveExpenses(expenses) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = JSON.stringify(expenses);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Set a cookie that expires in the future</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.cookie = `budgetExpenses=${encodeURIComponent(data)}; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (e) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Could not save expenses:', e);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Loads expenses from browser cookies.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @returns {object} The loaded expenses object or an empty object.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function loadExpenses() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const cookies = document.cookie.split(';');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let cookie of cookies) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const [name, value] = cookie.trim().split('=');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (name === 'budgetExpenses' &amp;&amp; value) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>return JSON.parse(decodeURIComponent(value));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (e) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Could not load expenses:', e);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return {}; // Return empty object if nothing is found</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Ensures every expense has a unique ID for reliable deletion.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* This is for backward compatibility if old data exists without IDs.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function ensureExpenseIds() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let needsSave = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (const dateKey in expenses) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expenses[dateKey] = expenses[dateKey].map(expense =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (!expense.id) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>expense.id = Date.now() + Math.random();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>needsSave = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return expense;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (needsSave) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>saveExpenses(expenses);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- Core Logic ---</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Creates a standardized key from a date object (e.g., "2023-10-27").</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {Date} date - The date to convert.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @returns {string} The date key.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function getDateKey(date) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return date.toISOString().split('T')[0];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Retrieves expenses for a specific date.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {Date} date - The date to get expenses for.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @returns {Array} An array of expense objects.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function getExpensesForDate(date) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dateKey = getDateKey(date);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return expenses[dateKey] || [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Adds a new expense to the selected date.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {string} description - The expense description.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} amount - The expense amount.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addExpense(description, amount) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const targetDateKey = getDateKey(selectedDate);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!expenses[targetDateKey]) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expenses[targetDateKey] = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const newExpense = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: Date.now() + Math.random(), // Unique ID</p>
+<p class="p1"><span class="Apple-converted-space">                </span>description,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>amount: parseFloat(amount),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>timestamp: new Date().toISOString()</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>expenses[targetDateKey].push(newExpense);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveExpenses(expenses);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateUI(); // Refresh the entire display</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Deletes an expense by its ID and date key.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {string} dateKey - The key for the date of the expense.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} expenseId - The unique ID of the expense to delete.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function deleteExpense(dateKey, expenseId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (expenses[dateKey]) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expenses[dateKey] = expenses[dateKey].filter(exp =&gt; exp.id !== expenseId);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// If a date has no more expenses, remove it from the object</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (expenses[dateKey].length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>delete expenses[dateKey];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>saveExpenses(expenses);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateUI(); // Refresh the entire display</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- UI Updates ---</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Main function to update all parts of the UI.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateUI() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDailyBudgetHeader();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateExpensesList();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateMonthlySummary();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Updates the header with the budget status for the selected date.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateDailyBudgetHeader() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const selectedExpenses = getExpensesForDate(selectedDate);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalSpent = selectedExpenses.reduce((sum, exp) =&gt; sum + exp.amount, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const remaining = DAILY_BUDGET - totalSpent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const statusElement = document.getElementById('budget-status');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('remaining-budget').textContent = Math.abs(remaining).toFixed(2);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isToday = getDateKey(selectedDate) === getDateKey(currentDate);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dateText = isToday ? 'today' : `on ${selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (remaining &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusElement.textContent = `$${remaining.toFixed(2)} remaining ${dateText}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusElement.className = 'budget-status under-budget';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (remaining &lt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusElement.textContent = `$${Math.abs(remaining).toFixed(2)} over budget ${dateText}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusElement.className = 'budget-status over-budget';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusElement.textContent = `Exactly on budget ${dateText}!`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusElement.className = 'budget-status on-budget';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Updates the list of expenses for the selected date.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateExpensesList() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const selectedExpenses = getExpensesForDate(selectedDate);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('expenses-container');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dateLabel = document.getElementById('expenses-date');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update the title (e.g., "Today's Expenses" or "Oct 27's Expenses")</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (getDateKey(selectedDate) === getDateKey(currentDate)) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dateLabel.textContent = "Today's";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dateLabel.textContent = selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + "'s";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.innerHTML = ''; // Clear previous list</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (selectedExpenses.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const dateText = getDateKey(selectedDate) === getDateKey(currentDate) ? 'today' : 'this day';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>container.innerHTML = `&lt;p style="text-align: center; color: #bbb; font-style: italic;"&gt;No expenses yet ${dateText}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>selectedExpenses.forEach(expense =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const expenseDiv = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expenseDiv.className = 'expense-item';</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expenseDiv.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="expense-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="expense-description"&gt;${expense.description}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="expense-amount"&gt;$${expense.amount.toFixed(2)}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="delete-btn" title="Delete expense"&gt;×&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Add event listener to the delete button</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expenseDiv.querySelector('.delete-btn').addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>deleteExpense(getDateKey(selectedDate), expense.id);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>container.appendChild(expenseDiv);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Updates the monthly summary based on the current month.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateMonthlySummary() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const month = currentDate.getMonth();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const year = currentDate.getFullYear();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const daysInMonth = new Date(year, month + 1, 0).getDate();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const monthlyBudget = DAILY_BUDGET * daysInMonth;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let monthlySpent = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (const dateKey in expenses) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const expenseDate = new Date(dateKey); // Add time to avoid timezone issues</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (expenseDate.getMonth() === month &amp;&amp; expenseDate.getFullYear() === year) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>monthlySpent += expenses[dateKey].reduce((sum, exp) =&gt; sum + exp.amount, 0);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('monthly-budget').textContent = monthlyBudget.toFixed(2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('monthly-spent').textContent = monthlySpent.toFixed(2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('monthly-remaining').textContent = (monthlyBudget - monthlySpent).toFixed(2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Renders the calendar for the currently viewed month.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateCalendar() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const grid = document.getElementById('calendar-grid');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const monthYearEl = document.getElementById('current-month-year');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const year = viewingMonth.getFullYear();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const month = viewingMonth.getMonth();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>monthYearEl.textContent = viewingMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Add day headers (S, M, T, W, T, F, S)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const dayEl = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dayEl.className = 'calendar-day header';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dayEl.textContent = day;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid.appendChild(dayEl);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Calculate the start date for the calendar grid</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const firstDayOfMonth = new Date(year, month, 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const startDate = new Date(firstDayOfMonth);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startDate.setDate(startDate.getDate() - firstDayOfMonth.getDay());</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Create 42 days for the grid (6 weeks)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 42; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const date = new Date(startDate);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>date.setDate(date.getDate() + i);</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const dayEl = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dayEl.className = 'calendar-day';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dayEl.textContent = date.getDate();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isCurrentViewingMonth = date.getMonth() === month;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (isCurrentViewingMonth) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>dayEl.classList.add('current-month', 'clickable');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Style the day based on spending</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const daySpent = getExpensesForDate(date).reduce((sum, exp) =&gt; sum + exp.amount, 0);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (daySpent &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (daySpent &lt; DAILY_BUDGET) dayEl.classList.add('under-budget');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else if (daySpent &gt; DAILY_BUDGET) dayEl.classList.add('over-budget');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else dayEl.classList.add('on-budget');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Highlight today and the selected date</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (date.toDateString() === currentDate.toDateString()) dayEl.classList.add('today');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (date.toDateString() === selectedDate.toDateString()) dayEl.classList.add('selected');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Add click handler to view expenses for this date</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>dayEl.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>selectedDate = date;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>dayEl.classList.add('other-month');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid.appendChild(dayEl);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- Event Listeners ---</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Handle form submission to add a new expense</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('expense-form').addEventListener('submit', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const descriptionInput = document.getElementById('expense-description');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const amountInput = document.getElementById('expense-amount');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (descriptionInput.value &amp;&amp; amountInput.value &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>addExpense(descriptionInput.value, amountInput.value);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>e.target.reset(); // Clear the form</p>
+<p class="p1"><span class="Apple-converted-space">                </span>descriptionInput.focus();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Navigate to the previous month in the calendar</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('prev-month').addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>viewingMonth.setMonth(viewingMonth.getMonth() - 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Navigate to the next month in the calendar</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('next-month').addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>viewingMonth.setMonth(viewingMonth.getMonth() + 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- Initial Load ---</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Run on page load</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function initialize() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ensureExpenseIds();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>initialize();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
