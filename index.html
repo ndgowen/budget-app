@@ -47,6 +47,7 @@
 
         /* Header section with title and budget */
         .header {
+            position: relative;
             text-align: center;
             margin-bottom: 32px;
         }
@@ -71,6 +72,34 @@
         }
         .daily-budget:hover {
             transform: scale(1.05);
+        }
+
+        /* Refresh Button */
+        .refresh-button {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .refresh-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: #4CA771;
+            stroke-width: 2.5;
+        }
+
+        .refresh-button:hover {
+            background-color: rgba(1, 50, 55, 0.1);
+        }
+
+        .refresh-button:active {
+            transform: rotate(90deg) scale(0.9);
         }
 
         /* Budget status indicator */
@@ -463,6 +492,9 @@
 <body>
     <div class="container">
         <div class="header">
+            <button id="refresh-btn" class="refresh-button" aria-label="Refresh Page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+            </button>
             <h1 class="app-title">Daily Budget</h1>
             <div class="daily-budget" id="edit-budget-btn">$<span id="daily-budget-amount">50.00</span></div>
             <div class="budget-status" id="budget-status">Ready to track expenses</div>
@@ -815,6 +847,10 @@
         document.getElementById('next-month').addEventListener('click', () => {
             viewingMonth.setMonth(viewingMonth.getMonth() + 1);
             updateCalendar();
+        });
+
+        document.getElementById('refresh-btn').addEventListener('click', () => {
+            location.reload();
         });
 
         // --- Initial Load ---
