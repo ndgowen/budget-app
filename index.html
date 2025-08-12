@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Budget Tracker</title>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
-
     <!-- PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="light-content">
@@ -28,7 +23,7 @@
         }
 
         body {
-            font-family: 'Rubik', 'Avenir', 'Avenir Next', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             background: #EAF9E7;
             color: #013237;
             min-height: 100vh;
@@ -39,12 +34,13 @@
         .container {
             max-width: 400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.75);
             border-radius: 24px;
             padding: 20px;
             box-shadow: 0 8px 32px rgba(1, 50, 55, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-sizing: border-box;
             width: calc(100% - 20px);
         }
@@ -56,7 +52,6 @@
         }
 
         .app-title {
-            font-family: 'Rubik', 'Avenir Next', sans-serif;
             font-size: 32px;
             font-weight: 300;
             color: #4CA771;
@@ -65,12 +60,17 @@
         }
 
         .daily-budget {
-            font-family: 'Rubik', 'Avenir Next', sans-serif;
             font-size: 48px;
             font-weight: 300;
             color: #013237;
             margin-bottom: 16px;
             letter-spacing: -0.3px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        .daily-budget:hover {
+            transform: scale(1.05);
         }
 
         /* Budget status indicator */
@@ -144,7 +144,7 @@
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .add-expense-btn:hover {
@@ -153,7 +153,8 @@
         }
 
         .add-expense-btn:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 10px rgba(1, 50, 55, 0.3);
         }
 
         /* Styling for the list of expenses */
@@ -162,7 +163,6 @@
         }
 
         .section-title {
-            font-family: 'Rubik', 'Avenir Next', sans-serif;
             font-size: 20px;
             font-weight: 400;
             color: #4CA771;
@@ -180,6 +180,18 @@
             margin-bottom: 8px;
             border-left: 4px solid #C0E6BA;
             position: relative;
+            animation: pop-in 0.3s ease-out;
+        }
+
+        @keyframes pop-in {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .expense-content {
@@ -264,13 +276,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 4px;
+            border-radius: 50%;
             font-size: 10px;
             position: relative;
             min-height: 28px;
             max-height: 36px;
             padding: 1px;
             box-sizing: border-box;
+            border: 2px solid transparent;
         }
 
         .calendar-day.header {
@@ -290,6 +303,7 @@
         }
 
         .calendar-day.today {
+            border: 2px solid #4CA771;
             background: #013237;
             color: white;
             font-weight: 600;
@@ -298,16 +312,19 @@
         .calendar-day.over-budget {
             background: #FB923C;
             color: white;
+            border-color: transparent;
         }
 
         .calendar-day.under-budget {
             background: #C0E6BA;
             color: #013237;
+            border-color: transparent;
         }
 
         .calendar-day.on-budget {
             background: #4CA771;
             color: white;
+            border-color: transparent;
         }
 
         .calendar-day.clickable {
@@ -324,6 +341,11 @@
             border: 2px solid #013237;
             transform: scale(1.1);
         }
+        
+        .calendar-day.today.selected {
+            border: 2px solid #C0E6BA;
+        }
+
 
         /* Calendar navigation buttons */
         .nav-buttons {
@@ -350,11 +372,49 @@
         }
 
         .month-year {
-            font-family: 'Rubik', 'Avenir Next', sans-serif;
             font-size: 16px;
             font-weight: 400;
             color: #4CA771;
             letter-spacing: 0.3px;
+        }
+        
+        /* Settings Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 50, 55, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #EAF9E7;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(1, 50, 55, 0.2);
+            width: 90%;
+            max-width: 320px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
         }
 
         /* Responsive design for smaller screens */
@@ -384,8 +444,6 @@
                 min-height: 24px;
                 max-height: 28px;
                 font-size: 9px;
-                border-radius: 3px;
-                padding: 0;
             }
             
             .calendar-day.header {
@@ -406,7 +464,7 @@
     <div class="container">
         <div class="header">
             <h1 class="app-title">Daily Budget</h1>
-            <div class="daily-budget">$<span id="remaining-budget">50.00</span></div>
+            <div class="daily-budget" id="edit-budget-btn">$<span id="daily-budget-amount">50.00</span></div>
             <div class="budget-status" id="budget-status">Ready to track expenses</div>
         </div>
 
@@ -456,9 +514,21 @@
         </div>
     </div>
 
+    <!-- Settings Modal HTML -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-content">
+            <h3 class="section-title" style="text-align: center; margin-bottom: 24px;">Edit Daily Budget</h3>
+            <div class="form-group">
+                <label class="form-label" for="new-budget-input">New Daily Budget</label>
+                <input type="number" id="new-budget-input" class="form-input" placeholder="50.00" step="0.01" min="0">
+            </div>
+            <button id="save-budget-btn" class="add-expense-btn">Save</button>
+        </div>
+    </div>
+
     <script>
         // --- App State ---
-        const DAILY_BUDGET = 50;
+        let DAILY_BUDGET = 50;
         let currentDate = new Date();
         let viewingMonth = new Date();
         let selectedDate = new Date(); // Tracks which date we're viewing/editing
@@ -466,43 +536,33 @@
         
         // --- Data Persistence ---
         
-        /**
-         * Saves the expenses object to browser cookies.
-         * @param {object} expenses - The expenses object to save.
-         */
         function saveExpenses(expenses) {
             try {
-                const data = JSON.stringify(expenses);
-                // Set a cookie that expires in the future
-                document.cookie = `budgetExpenses=${encodeURIComponent(data)}; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/`;
+                localStorage.setItem('budgetExpenses', JSON.stringify(expenses));
             } catch (e) {
                 console.error('Could not save expenses:', e);
             }
         }
 
-        /**
-         * Loads expenses from browser cookies.
-         * @returns {object} The loaded expenses object or an empty object.
-         */
         function loadExpenses() {
             try {
-                const cookies = document.cookie.split(';');
-                for (let cookie of cookies) {
-                    const [name, value] = cookie.trim().split('=');
-                    if (name === 'budgetExpenses' && value) {
-                        return JSON.parse(decodeURIComponent(value));
-                    }
-                }
+                const data = localStorage.getItem('budgetExpenses');
+                return data ? JSON.parse(data) : {};
             } catch (e) {
                 console.error('Could not load expenses:', e);
             }
-            return {}; // Return empty object if nothing is found
+            return {};
+        }
+
+        function saveDailyBudget(budget) {
+            localStorage.setItem('dailyBudget', budget);
+        }
+
+        function loadDailyBudget() {
+            const savedBudget = localStorage.getItem('dailyBudget');
+            return savedBudget ? parseFloat(savedBudget) : 50;
         }
         
-        /**
-         * Ensures every expense has a unique ID for reliable deletion.
-         * This is for backward compatibility if old data exists without IDs.
-         */
         function ensureExpenseIds() {
             let needsSave = false;
             for (const dateKey in expenses) {
@@ -521,30 +581,15 @@
         
         // --- Core Logic ---
 
-        /**
-         * Creates a standardized key from a date object (e.g., "2023-10-27").
-         * @param {Date} date - The date to convert.
-         * @returns {string} The date key.
-         */
         function getDateKey(date) {
             return date.toISOString().split('T')[0];
         }
 
-        /**
-         * Retrieves expenses for a specific date.
-         * @param {Date} date - The date to get expenses for.
-         * @returns {Array} An array of expense objects.
-         */
         function getExpensesForDate(date) {
             const dateKey = getDateKey(date);
             return expenses[dateKey] || [];
         }
 
-        /**
-         * Adds a new expense to the selected date.
-         * @param {string} description - The expense description.
-         * @param {number} amount - The expense amount.
-         */
         function addExpense(description, amount) {
             const targetDateKey = getDateKey(selectedDate);
             if (!expenses[targetDateKey]) {
@@ -552,7 +597,7 @@
             }
             
             const newExpense = {
-                id: Date.now() + Math.random(), // Unique ID
+                id: Date.now() + Math.random(),
                 description,
                 amount: parseFloat(amount),
                 timestamp: new Date().toISOString()
@@ -560,80 +605,60 @@
             
             expenses[targetDateKey].push(newExpense);
             saveExpenses(expenses);
-            updateUI(); // Refresh the entire display
+            updateUI();
         }
 
-        /**
-         * Deletes an expense by its ID and date key.
-         * @param {string} dateKey - The key for the date of the expense.
-         * @param {number} expenseId - The unique ID of the expense to delete.
-         */
         function deleteExpense(dateKey, expenseId) {
             if (expenses[dateKey]) {
                 expenses[dateKey] = expenses[dateKey].filter(exp => exp.id !== expenseId);
-                // If a date has no more expenses, remove it from the object
                 if (expenses[dateKey].length === 0) {
                     delete expenses[dateKey];
                 }
                 saveExpenses(expenses);
-                updateUI(); // Refresh the entire display
+                updateUI();
             }
         }
 
         // --- UI Updates ---
 
-        /**
-         * Main function to update all parts of the UI.
-         */
         function updateUI() {
+            document.getElementById('daily-budget-amount').textContent = DAILY_BUDGET.toFixed(2);
             updateDailyBudgetHeader();
             updateExpensesList();
             updateMonthlySummary();
             updateCalendar();
         }
 
-        /**
-         * Updates the header with the budget status for the selected date.
-         */
         function updateDailyBudgetHeader() {
             const selectedExpenses = getExpensesForDate(selectedDate);
             const totalSpent = selectedExpenses.reduce((sum, exp) => sum + exp.amount, 0);
             const remaining = DAILY_BUDGET - totalSpent;
             const statusElement = document.getElementById('budget-status');
             
-            document.getElementById('remaining-budget').textContent = Math.abs(remaining).toFixed(2);
-            
             const isToday = getDateKey(selectedDate) === getDateKey(currentDate);
             const dateText = isToday ? 'today' : `on ${selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
             
-            if (remaining > 0) {
+            if (remaining >= 0) {
                 statusElement.textContent = `$${remaining.toFixed(2)} remaining ${dateText}`;
                 statusElement.className = 'budget-status under-budget';
-            } else if (remaining < 0) {
+            } else {
                 statusElement.textContent = `$${Math.abs(remaining).toFixed(2)} over budget ${dateText}`;
                 statusElement.className = 'budget-status over-budget';
-            } else {
-                statusElement.textContent = `Exactly on budget ${dateText}!`;
-                statusElement.className = 'budget-status on-budget';
             }
         }
 
-        /**
-         * Updates the list of expenses for the selected date.
-         */
         function updateExpensesList() {
             const selectedExpenses = getExpensesForDate(selectedDate);
             const container = document.getElementById('expenses-container');
             const dateLabel = document.getElementById('expenses-date');
             
-            // Update the title (e.g., "Today's Expenses" or "Oct 27's Expenses")
             if (getDateKey(selectedDate) === getDateKey(currentDate)) {
                 dateLabel.textContent = "Today's";
             } else {
                 dateLabel.textContent = selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + "'s";
             }
             
-            container.innerHTML = ''; // Clear previous list
+            container.innerHTML = '';
             
             if (selectedExpenses.length === 0) {
                 const dateText = getDateKey(selectedDate) === getDateKey(currentDate) ? 'today' : 'this day';
@@ -651,7 +676,6 @@
                         <button class="delete-btn" title="Delete expense">×</button>
                     `;
                     
-                    // Add event listener to the delete button
                     expenseDiv.querySelector('.delete-btn').addEventListener('click', () => {
                         deleteExpense(getDateKey(selectedDate), expense.id);
                     });
@@ -661,18 +685,15 @@
             }
         }
 
-        /**
-         * Updates the monthly summary based on the current month.
-         */
         function updateMonthlySummary() {
-            const month = currentDate.getMonth();
-            const year = currentDate.getFullYear();
+            const month = viewingMonth.getMonth();
+            const year = viewingMonth.getFullYear();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const monthlyBudget = DAILY_BUDGET * daysInMonth;
 
             let monthlySpent = 0;
             for (const dateKey in expenses) {
-                const expenseDate = new Date(dateKey); // Add time to avoid timezone issues
+                const expenseDate = new Date(dateKey + 'T00:00:00');
                 if (expenseDate.getMonth() === month && expenseDate.getFullYear() === year) {
                     monthlySpent += expenses[dateKey].reduce((sum, exp) => sum + exp.amount, 0);
                 }
@@ -683,9 +704,6 @@
             document.getElementById('monthly-remaining').textContent = (monthlyBudget - monthlySpent).toFixed(2);
         }
 
-        /**
-         * Renders the calendar for the currently viewed month.
-         */
         function updateCalendar() {
             const grid = document.getElementById('calendar-grid');
             const monthYearEl = document.getElementById('current-month-year');
@@ -696,7 +714,6 @@
             monthYearEl.textContent = viewingMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
             grid.innerHTML = '';
 
-            // Add day headers (S, M, T, W, T, F, S)
             ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day header';
@@ -704,12 +721,10 @@
                 grid.appendChild(dayEl);
             });
 
-            // Calculate the start date for the calendar grid
             const firstDayOfMonth = new Date(year, month, 1);
             const startDate = new Date(firstDayOfMonth);
             startDate.setDate(startDate.getDate() - firstDayOfMonth.getDay());
 
-            // Create 42 days for the grid (6 weeks)
             for (let i = 0; i < 42; i++) {
                 const date = new Date(startDate);
                 date.setDate(date.getDate() + i);
@@ -723,7 +738,6 @@
                 if (isCurrentViewingMonth) {
                     dayEl.classList.add('current-month', 'clickable');
                     
-                    // Style the day based on spending
                     const daySpent = getExpensesForDate(date).reduce((sum, exp) => sum + exp.amount, 0);
                     if (daySpent > 0) {
                         if (daySpent < DAILY_BUDGET) dayEl.classList.add('under-budget');
@@ -731,11 +745,9 @@
                         else dayEl.classList.add('on-budget');
                     }
                     
-                    // Highlight today and the selected date
                     if (date.toDateString() === currentDate.toDateString()) dayEl.classList.add('today');
                     if (date.toDateString() === selectedDate.toDateString()) dayEl.classList.add('selected');
                     
-                    // Add click handler to view expenses for this date
                     dayEl.addEventListener('click', () => {
                         selectedDate = date;
                         updateUI();
@@ -748,9 +760,41 @@
             }
         }
 
+        // --- Modal Logic ---
+        const modal = document.getElementById('settings-modal');
+        const editBudgetBtn = document.getElementById('edit-budget-btn');
+        const saveBudgetBtn = document.getElementById('save-budget-btn');
+        const newBudgetInput = document.getElementById('new-budget-input');
+
+        function showModal() {
+            newBudgetInput.value = DAILY_BUDGET.toFixed(2);
+            modal.classList.add('visible');
+        }
+
+        function hideModal() {
+            modal.classList.remove('visible');
+        }
+
+        editBudgetBtn.addEventListener('click', showModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideModal();
+            }
+        });
+        saveBudgetBtn.addEventListener('click', () => {
+            const newBudgetValue = parseFloat(newBudgetInput.value);
+            if (!isNaN(newBudgetValue) && newBudgetValue > 0) {
+                DAILY_BUDGET = newBudgetValue;
+                saveDailyBudget(DAILY_BUDGET);
+                updateUI();
+                hideModal();
+            } else {
+                alert('Please enter a valid budget amount.');
+            }
+        });
+
         // --- Event Listeners ---
         
-        // Handle form submission to add a new expense
         document.getElementById('expense-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const descriptionInput = document.getElementById('expense-description');
@@ -758,18 +802,16 @@
             
             if (descriptionInput.value && amountInput.value > 0) {
                 addExpense(descriptionInput.value, amountInput.value);
-                e.target.reset(); // Clear the form
+                e.target.reset();
                 descriptionInput.focus();
             }
         });
 
-        // Navigate to the previous month in the calendar
         document.getElementById('prev-month').addEventListener('click', () => {
             viewingMonth.setMonth(viewingMonth.getMonth() - 1);
             updateCalendar();
         });
 
-        // Navigate to the next month in the calendar
         document.getElementById('next-month').addEventListener('click', () => {
             viewingMonth.setMonth(viewingMonth.getMonth() + 1);
             updateCalendar();
@@ -777,8 +819,8 @@
 
         // --- Initial Load ---
         
-        // Run on page load
         function initialize() {
+            DAILY_BUDGET = loadDailyBudget();
             ensureExpenseIds();
             updateUI();
         }
